@@ -1,0 +1,30 @@
+body {
+  overflow:hidden;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  position:relative;
+}
+
+[marker] {
+  opacity: 0.5;
+  z-index: 1;
+  position: absolute;
+  cursor: pointer;
+  overflow: visible;
+  font-family:sans-serif;
+  color: white;
+}
+
+[marker]:before {
+  content: 'ツ';
+  font-size: 40px;
+  height: 40px;
+  width: 40px;
+}
+
+[marker].active {
+  opacity: 1;
+}
