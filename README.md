@@ -1,4 +1,5 @@
 ng-pano
 =======
 
-AngularJS implementation of equirectangular panorama viewer. Compatible with any browser supporting either WebGL or HTML5 Canvas.
+angularjs equirectangular panorama viewer. cross-browser compatible, will
+render w webgl if possible but otherwise falls back to html canvas
