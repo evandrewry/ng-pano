@@ -21,24 +21,30 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 define [
-  "lib/three",
-  "lib/detector",
-  "data/data",
-  "lib/angular",
+  "lib/three"
+  "lib/detector"
+  "data/data"
+  "lib/angular"
   "cs!$safeApply"
-], (THREE, Detector, data, ng) ->
+],
+
+(THREE, Detector, data, ng) ->
 
   pano = ng.module 'panorama', ['angular.safeApply']
 
   pano.value 'DEFAULT_FOV', 70
+  pano.value 'DEFAULT_FRAME_RATE', 15
+  pano.value 'DEFAULT_FOV', 70
+  pano.value 'DEFAULT_FOV', 70
+
 
   pano.factory 'TEXTURE', ->
     data.texture
 
-  pano.factory 'Clock', ->
+  pano.factory 'Clock', ['DEFAULT_FRAME_RATE', (DEFAULT_FRAME_RATE) ->
     callbacks = []
     lastFrame = new Date().getTime()
-    frameRate = 15
+    frameRate = DEFAULT_FRAME_RATE
     frameTime = 1000 / frameRate
     @add = (obj, handler) ->
       @callbacks.push binding: obj, handler: handler
@@ -51,6 +57,7 @@ define [
         lastFrame = now
         cb.handler.call cb.binding for cb in callbacks
     this
+  ]
 
   pano.factory 'Projector', ['Camera', (Camera) -> 
     projector = new THREE.Projector()
@@ -143,7 +150,6 @@ define [
       theta: -> @mouse.lon * Math.PI / 180
       clamp: =>
         @mouse.lat = Math.max(-85, Math.min(85, @mouse.lat))
-
       mousedown: (event) =>
         event.preventDefault()
         @mouse.active = true
@@ -151,16 +157,8 @@ define [
         @mouse.down.y = event.clientY
         @mouse.down.lon = @mouse.lon
         @mouse.down.lat = @mouse.lat
-
-
       mouseup: (event) =>
         @mouse.active = false
-        #@stale = false
-        #vector = new THREE.Vector3(@mouse.x, @mouse.y, 0.5)
-        #@projector.unprojectVector vector, @camera
-        #ray = new THREE.Raycaster(@camera.position, vector.sub(@camera.position).normalize())
-        #intersects = ray.intersectObjects(@scene.children)
-
       mousemove: (event) =>
         if @mouse.active
           @mouse.lon = (@mouse.down.x - event.clientX) * 0.1 + @mouse.down.lon
@@ -168,17 +166,7 @@ define [
           @stale = true
         @mouse.x = (event.clientX / window.innerWidth) * 2 - 1
         @mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
-
       mousewheel: (event) =>
-        return
-        #    if event.wheelDeltaY
-        #      @fov -= event.wheelDeltaY * 0.05
-        #    else if event.wheelDelta
-        #      @fov -= event.wheelDelta * 0.05
-        #    else @fov += event.detail * 1.0  if event.detail
-        #    Camera.projectionMatrix.makePerspective @fov, window.innerWidth / window.innerHeight, 1, 1100
-        #    @render()
-
     new Trackball()
 
 
