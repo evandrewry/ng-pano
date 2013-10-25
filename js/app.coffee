@@ -21,47 +21,57 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 define [
-  "lib/three",
-  "lib/detector",
-  "data/data",
   "lib/angular",
   "cs!panorama",
   "cs!$safeApply",
-], (THREE, Detector, data, ng) ->
+], (ng) ->
 
   cwut = ng.module 'cwut', ['panorama']
 
-  cwut.directive 'marker', ['Camera', 'Projector', '$timeout', '$safeApply', (Camera, Projector,$timeout, $safeApply)->
-    template: '<div ng-click="onclick()" ng-style="{left: x, top: y, \'margin-left\': offset}" ng-class="{\'active\': active}" ng-show="markerOnScreen"><span class="marker-label" ng-show="active">Poon Han Seng</span><br><div style="background-position: 0px 0px;" class="marker-symbol"></div></div>'
-    scope:
-      markerPosition: '='
-      markerOnScreen: '='
-    require: '^panorama'
-    replace: true
-    link: (scope, elem, attrs, PanoramaCtrl) ->
-      PanoramaCtrl.registerCallback =>
-        scope.markerOnScreen = Projector.getScreenPosition(scope.markerPosition)
-        if scope.markerOnScreen
-          proj = Projector.getScreenPosition(scope.markerPosition.clone(), Camera)
-          if proj
-            $safeApply scope, ->
-              scope.x = proj.x
-              scope.y = proj.y
+  cwut.directive 'marker',
+  [
+    'Camera'
+    'Projector'
+    '$timeout'
+    '$safeApply'
 
-      scope.active = false
-      #$timeout -> scope.offset = - elem.outerWidth() / 2
-      scope.onclick = ->
-        scope.active = !scope.active
+    (Camera, Projector,$timeout, $safeApply)->
+      template: '<div ng-click="onclick()" ng-style="{left: x, top: y, \'margin-left\': offset}" ng-class="{\'active\': active}" ng-show="markerOnScreen"><span class="marker-label" ng-show="active">Poon Han Seng</span><br><div style="background-position: 0px 0px;" class="marker-symbol"></div></div>'
+      scope:
+        markerPosition: '='
+        markerOnScreen: '='
+      require: '^panorama'
+      replace: true
+      link: (scope, elem, attrs, PanoramaCtrl) ->
+        PanoramaCtrl.registerCallback =>
+          scope.markerOnScreen = Projector.getScreenPosition(scope.markerPosition)
+          if scope.markerOnScreen
+            proj = Projector.getScreenPosition(scope.markerPosition.clone(), Camera)
+            if proj
+              $safeApply scope, ->
+                scope.x = proj.x
+                scope.y = proj.y
+
+        scope.active = false
         #$timeout -> scope.offset = - elem.outerWidth() / 2
+        scope.onclick = ->
+          scope.active = !scope.active
+          #$timeout -> scope.offset = - elem.outerWidth() / 2
   ]
 
-  cwut.directive 'panorama', ['Panorama', 'Renderer', 'MARKERS', (Panorama, Renderer, MARKERS) ->
-    template: '<div><div marker data-marker-position="marker" marker-on-screen="marker.visible" ng-repeat="marker in markers"></div></div>'
-    replace: true
-    controller: ['Panorama', (Panorama) ->
-      pano = new Panorama()
-    ]
-    link: (scope, elem, attrs) ->
-      elem.append Renderer.domElement
-      scope.markers = MARKERS
+  cwut.directive 'panorama',
+  [
+    'Panorama'
+    'Renderer'
+    'MARKERS'
+
+    (Panorama, Renderer, MARKERS) ->
+      template: '<div><div marker data-marker-position="marker" marker-on-screen="marker.visible" ng-repeat="marker in markers"></div></div>'
+      replace: true
+      controller: ['Panorama', (Panorama) ->
+        new Panorama()
+      ]
+      link: (scope, elem, attrs) ->
+        elem.append Renderer.domElement
+        scope.markers = MARKERS
   ]

@@ -23,11 +23,10 @@
 define [
   "lib/three",
   "lib/detector",
-  "lib/tween",
   "data/data",
   "lib/angular",
   "cs!$safeApply"
-], (THREE, Detector, TWEEN, data, ng) ->
+], (THREE, Detector, data, ng) ->
 
   pano = ng.module 'panorama', ['angular.safeApply']
 
@@ -216,7 +215,6 @@ define [
         animate: =>
           requestAnimationFrame @animate
           @render()
-          TWEEN.update()
 
         registerCallback: (cb) =>
           @onrender.push cb
