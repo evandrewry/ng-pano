@@ -23,12 +23,11 @@
 define [
   "lib/three",
   "lib/detector",
-  "lib/tween",
   "data/data",
   "lib/angular",
   "cs!panorama",
   "cs!$safeApply",
-], (THREE, Detector, TWEEN, data, ng) ->
+], (THREE, Detector, data, ng) ->
 
   cwut = ng.module 'cwut', ['panorama']
 
