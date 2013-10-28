@@ -36,12 +36,7 @@ define [
     '$safeApply'
 
     (Camera, Projector,$timeout, $safeApply)->
-      template: '''
-        <div ng-click="onclick()" ng-style="{left: x, top: y, \'margin-left\': offset}" ng-class="{\'active\': active}" ng-show="markerOnScreen">
-          <span class="marker-label" ng-show="active" ng-transclude></span>
-          <div style="background-position: 0px 0px;" class="marker-symbol"></div>
-        </div>
-        '''
+      template: '<div ng-click="onclick()" ng-style="{left: x, top: y, \'margin-left\': offset}" ng-class="{\'active\': active}" ng-show="markerOnScreen" ng-transclude></div>'
       scope:
         markerPosition: '='
         markerOnScreen: '='
@@ -59,14 +54,11 @@ define [
                 scope.y = proj.y
 
         scope.active = false
-        #$timeout -> scope.offset = - elem.outerWidth() / 2
-        scope.onclick = ->
-          scope.active = !scope.active
-          #$timeout -> scope.offset = - elem.outerWidth() / 2
+        scope.onclick = -> scope.active = !scope.active
   ]
 
   cwut.directive 'markerPano', ->
-      template: '<div panorama><div marker data-marker-position="marker" data-marker-on-screen="marker.visible" ng-repeat="marker in markers">POON HAN XXX</div></div>'
+      template: '<div panorama><div marker data-marker-position="marker" data-marker-on-screen="marker.visible" ng-repeat="marker in markers"></div></div>'
       controller: ['$scope', 'MARKERS', ($scope, MARKERS) ->
           $scope.markers = MARKERS
       ]
