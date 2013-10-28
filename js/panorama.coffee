@@ -34,7 +34,7 @@ define [
 
   pano.value 'DEFAULT_FOV', 70
   pano.value 'DEFAULT_FRAME_RATE', 15
-  pano.value 'DEFAULT_FOV', 70
+  pano.value 'DEFAULT_SPHERE_RADIUS', 500
   pano.value 'DEFAULT_FOV', 70
 
 
@@ -83,7 +83,7 @@ define [
   pano.factory 'MARKERS', ->
     m = new THREE.Vector3(m.x, m.y, m.z) for m in data.markers
 
-  pano.factory 'Camera', ['Trackball', 'DEFAULT_FOV', (Trackball, DEFAULT_FOV) ->
+  pano.factory 'Camera', ['Trackball', 'DEFAULT_FOV', 'DEFAULT_SPHERE_RADIUS', (Trackball, DEFAULT_FOV, DEFAULT_SPHERE_RADIUS) ->
     camera = new THREE.PerspectiveCamera DEFAULT_FOV, window.innerWidth / window.innerHeight, 1, 1100
     camera.target = new THREE.Vector3 0, 0, 0
     camera.trackball = ->
@@ -92,9 +92,9 @@ define [
       phi = Trackball.phi()
       theta = Trackball.theta()
 
-      camera.target.x = 500 * Math.sin(phi) * Math.cos(theta)
-      camera.target.y = 500 * Math.cos(phi)
-      camera.target.z = 500 * Math.sin(phi) * Math.sin(theta)
+      camera.target.x = DEFAULT_SPHERE_RADIUS * Math.sin(phi) * Math.cos(theta)
+      camera.target.y = DEFAULT_SPHERE_RADIUS * Math.cos(phi)
+      camera.target.z = DEFAULT_SPHERE_RADIUS * Math.sin(phi) * Math.sin(theta)
 
       pos = camera.target.clone().normalize().multiplyScalar(-20)
       camera.position.set pos.x, pos.y, pos.z
@@ -103,7 +103,7 @@ define [
     return camera
   ]
 
-  pano.factory 'SphereFactory', ['TEXTURE', (TEXTURE) ->
+  pano.factory 'SphereFactory', ['TEXTURE', 'DEFAULT_SPHERE_RADIUS', (TEXTURE, DEFAULT_SPHERE_RADIUS) ->
     group = (sphere) ->
       group = new THREE.Object3D()
       group.add sphere
