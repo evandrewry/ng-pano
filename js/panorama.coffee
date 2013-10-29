@@ -174,6 +174,7 @@ define [
 
   pano.factory 'Panorama',
   [
+    '$rootScope',
     'Trackball',
     'Clock',
     'Renderer',
@@ -186,7 +187,7 @@ define [
     'TEXTURE',
     '$safeApply',
 
-    (Trackball, Clock, Renderer, Camera, SphereFactory, Projector, Scene, DEFAULT_FOV, MARKERS, TEXTURE, $safeApply) ->
+    ($rootScope, Trackball, Clock, Renderer, Camera, SphereFactory, Projector, Scene, DEFAULT_FOV, MARKERS, TEXTURE, $safeApply) ->
       class Panorama
         onrender: []
         onloading: []
@@ -209,11 +210,11 @@ define [
           @currentTexture += 1
           @setTexture TEXTURE[@currentTexture]
         setTexture: (textureUrl) =>
-          cb() for cb in @onloading
+          $rootScope.$broadcast 'pano.loading'
           @remove() if @group
           @group = SphereFactory textureUrl, =>
             @render true
-            cb() for cb in @onready
+            $rootScope.$broadcast 'pano.load'
           Scene.add @group
         remove: =>
           Scene.remove @group

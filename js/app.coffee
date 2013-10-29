@@ -76,8 +76,8 @@ define [
         bar.css('-webkit-transform', "rotate(#{360 * i / 13}deg) translate(0, -142%)")
         spinner.append bar
       (scope, elem, attrs, PanoramaCtrl) ->
-        PanoramaCtrl.onloading.push => $safeApply scope, -> scope.loading = true
-        PanoramaCtrl.onready.push => $safeApply scope, -> scope.loading = false
+        scope.$on 'pano.loading', -> scope.loading = true
+        scope.$on 'pano.load', -> scope.loading = false
     controller: ['$scope', ($scope) ->
       $scope.loading = true
     ]
