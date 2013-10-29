@@ -1,6 +1,22 @@
 define(
   {
-    'texture': 'img/narthex.jpg',
+    'textures': [
+      'img/narthex.jpg',
+      'img/airport-art.jpg',
+      'img/akihabara.jpg',
+      'img/bordaux.jpg',
+      'img/chubu.jpg',
+      'img/elevador.jpg',
+      'img/israel.jpg',
+      'img/library.jpg',
+      'img/livres.jpg',
+      'img/pastry-factory-panorama.jpg',
+      'img/snow.jpg',
+      'img/tourists.jpg',
+      'img/veranda.jpg',
+      'img/winter.jpg',
+      'img/workshop.jpeg',
+    ],
     'markers': [
       {
         x: -70.9979707245509,

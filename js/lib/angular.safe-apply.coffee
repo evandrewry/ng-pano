@@ -5,7 +5,7 @@ define ['lib/angular'], (ng) ->
     ($scope, fn) ->
       phase = $scope.$root.$$phase
       if phase == '$apply' or phase == '$digest'
-        $scope.$evalfn if fn
+        $scope.$eval fn if fn
       else
         if fn
           $scope.$apply fn

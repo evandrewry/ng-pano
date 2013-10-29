@@ -39,7 +39,7 @@ define [
 
 
   pano.factory 'TEXTURE', ->
-    data.texture
+    data.textures
 
   pano.factory 'Clock', ['DEFAULT_FRAME_RATE', (DEFAULT_FRAME_RATE) ->
     callbacks = []
@@ -103,26 +103,27 @@ define [
     return camera
   ]
 
-  pano.factory 'SphereFactory', ['TEXTURE', 'DEFAULT_SPHERE_RADIUS', (TEXTURE, DEFAULT_SPHERE_RADIUS) ->
-    group = (sphere) ->
-      group = new THREE.Object3D()
-      group.add sphere
-      group.position.x = 0
-      group.position.y = 0
-      group.position.z = 0
-      return group
-    sphere = (texture) ->
-      geometry = if Detector.webgl
-        new THREE.SphereGeometry(500, 600, 40)
-      else
-        #reduce number of poligons to improve performance
-        new THREE.SphereGeometry(500, 600, 40)
-      sphere = new THREE.Mesh geometry, new THREE.MeshBasicMaterial map: texture, wireframe: false
-      sphere.overdraw = true unless Detector.webgl
-      sphere.doubleSided = true
-      sphere.scale.x = -1
-      sphere
-    (cb) -> group sphere THREE.ImageUtils.loadTexture TEXTURE, undefined, cb
+  pano.factory 'SphereFactory', ['DEFAULT_SPHERE_RADIUS', (DEFAULT_SPHERE_RADIUS) ->
+    (textureUrl, cb) -> 
+      group = (sphere) ->
+        group = new THREE.Object3D()
+        group.add sphere
+        group.position.x = 0
+        group.position.y = 0
+        group.position.z = 0
+        return group
+      sphere = (texture) ->
+        geometry = if Detector.webgl
+          new THREE.SphereGeometry(500, 600, 40)
+        else
+          #reduce number of poligons to improve performance
+          new THREE.SphereGeometry(500, 600, 40)
+        sphere = new THREE.Mesh geometry, new THREE.MeshBasicMaterial map: texture, wireframe: false
+        sphere.overdraw = true unless Detector.webgl
+        sphere.doubleSided = true
+        sphere.scale.x = -1
+        sphere
+      group sphere THREE.ImageUtils.loadTexture textureUrl, undefined, cb
   ]
 
   pano.factory 'Trackball', ->
@@ -188,9 +189,10 @@ define [
     (Trackball, Clock, Renderer, Camera, SphereFactory, Projector, Scene, DEFAULT_FOV, MARKERS, TEXTURE, $safeApply) ->
       class Panorama
         onrender: []
+        onloading: []
+        onready: []
         constructor: ->
-          @group = SphereFactory =>@render true
-          Scene.add @group
+          @setTexture TEXTURE[@currentTexture = 0]
           Renderer.setSize window.innerWidth, window.innerHeight
           Renderer.sortObjects = false
           @animate()
@@ -203,9 +205,22 @@ define [
         animate: =>
           requestAnimationFrame @animate
           @render()
+        nextTexture: =>
+          @currentTexture += 1
+          @setTexture TEXTURE[@currentTexture]
+        setTexture: (textureUrl) =>
+          cb() for cb in @onloading
+          @remove() if @group
+          @group = SphereFactory textureUrl, =>
+            @render true
+            cb() for cb in @onready
+          Scene.add @group
+        remove: =>
+          Scene.remove @group
 
         registerCallback: (cb) =>
           @onrender.push cb
+      new Panorama()
   ]
 
 

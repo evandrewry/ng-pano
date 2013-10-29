@@ -36,7 +36,7 @@ define [
     '$safeApply'
 
     (Camera, Projector,$timeout, $safeApply)->
-      template: '<div ng-click="onclick()" ng-style="{left: x, top: y, \'margin-left\': offset}" ng-class="{\'active\': active}" ng-show="markerOnScreen" ng-transclude></div>'
+      template: '<div ng-click="onclick()" ng-style="{left: x, top: y, \'margin-left\': offset}" ng-class="{\'active\': active}" ng-show="markerOnScreen && !ctrl.loading" ng-transclude></div>'
       scope:
         markerPosition: '='
         markerOnScreen: '='
@@ -44,6 +44,7 @@ define [
       transclude: true
       replace: true
       link: (scope, elem, attrs, PanoramaCtrl) ->
+        scope.ctrl = PanoramaCtrl
         PanoramaCtrl.registerCallback =>
           scope.markerOnScreen = Projector.getScreenPosition(scope.markerPosition)
           if scope.markerOnScreen
@@ -58,11 +59,29 @@ define [
   ]
 
   cwut.directive 'markerPano', ->
-      template: '<div panorama><div marker data-marker-position="marker" data-marker-on-screen="marker.visible" ng-repeat="marker in markers"></div></div>'
-      controller: ['$scope', 'MARKERS', ($scope, MARKERS) ->
+      template: '<div panorama><div panorama-spinner></div><div marker data-marker-position="marker" data-marker-on-screen="marker.visible" ng-repeat="marker in markers"></div><div class="next-texture-btn" ng-click="next()"></div></div>'
+      controller: ['$scope', 'Panorama', 'MARKERS', ($scope, Panorama, MARKERS) ->
           $scope.markers = MARKERS
+          $scope.next = Panorama.nextTexture
       ]
 
+  cwut.directive 'panoramaSpinner', ['$safeApply', ($safeApply) ->
+    require: '^panorama'
+    template: '<div ng-show="loading"><div class="spinner"></div></div>'
+    replace: true
+    compile: (tElem, tAttrs, transclude) ->
+      spinner = tElem.find '.spinner'
+      for i in [1..13]
+        bar = angular.element "<div class=\"spinner-bar-#{i}\"></div>" 
+        bar.css('-webkit-transform', "rotate(#{360 * i / 13}deg) translate(0, -142%)")
+        spinner.append bar
+      (scope, elem, attrs, PanoramaCtrl) ->
+        PanoramaCtrl.onloading.push => $safeApply scope, -> scope.loading = true
+        PanoramaCtrl.onready.push => $safeApply scope, -> scope.loading = false
+    controller: ['$scope', ($scope) ->
+      $scope.loading = true
+    ]
+  ]
 
   cwut.directive 'panorama',
   [
@@ -74,8 +93,9 @@ define [
       template: '<div ng-transclude></div>'
       replace: true
       transclude: true
+      controllerAs: 'PanoramaCtrl'
       controller: ['Panorama', (Panorama) ->
-        new Panorama()
+        Panorama
       ]
       link: (scope, elem, attrs) ->
         elem.append Renderer.domElement
