@@ -1,11 +1,18 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic);
+/* line 6, ../sass/app.sass */
 body {
   overflow: hidden;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+}
 
+/* line 11, ../sass/app.sass */
 canvas {
-  position: relative; }
+  position: relative;
+}
 
+/* line 14, ../sass/app.sass */
 [marker], .next-texture-btn {
   opacity: 0.5;
   z-index: 1;
@@ -13,49 +20,975 @@ canvas {
   cursor: pointer;
   overflow: visible;
   font-family: sans-serif;
-  color: white; }
+  color: white;
+}
 
+/* line 23, ../sass/app.sass */
 [marker]:before {
   content: "ツ";
   font-size: 40px;
   height: 40px;
-  width: 40px; }
+  width: 40px;
+}
 
+/* line 30, ../sass/app.sass */
 [marker].active {
-  opacity: 1; }
+  opacity: 1;
+}
 
-[panorama-spinner] {
-  position: absolute;
-  z-index: 2;
-  height: 100%;
-  width: 100%; }
-
-.spinner {
-  position: relative;
-  height: 100%;
-  background-color: black;
-  opacity: 1; }
-
-.spinner div {
-  width: 3px;
-  height: 128px;
-  background: white;
-  position: absolute;
-  left: 44.5%;
-  top: 37%;
-  opacity: 0;
-  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-  -webkit-animation: fade 1s linear infinite; }
-
+/* line 34, ../sass/app.sass */
 .next-texture-btn:before {
   content: "=>";
   font-size: 40px;
   height: 40px;
-  width: 40px; }
+  width: 40px;
+}
+
+/* line 40, ../sass/app.sass */
+[panorama-spinner] {
+  background-color: black;
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 51, ../sass/app.sass */
+.spinner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+/* line 56, ../sass/app.sass */
+.spinner:before {
+  content: "LOADING, PLEASE WAIT";
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 36px;
+  color: white;
+  opacity: 1;
+  display: block;
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  margin-left: -165px;
+}
+
+/* line 69, ../sass/app.sass */
+.spinner-arm, .spinner-arm-1, .spinner-arm-2, .spinner-arm-3, .spinner-arm-4, .spinner-arm-5, .spinner-arm-6, .spinner-arm-7, .spinner-arm-8, .spinner-arm-9, .spinner-arm-10, .spinner-arm-11, .spinner-arm-12, .spinner-arm-13, .spinner-arm-14, .spinner-arm-15, .spinner-arm-16, .spinner-arm-17, .spinner-arm-18, .spinner-arm-19, .spinner-arm-20, .spinner-arm-21, .spinner-arm-22, .spinner-arm-23 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  width: 240px;
+  height: 40px;
+  background: white;
+  position: absolute;
+  left: 50%;
+  margin-left: -120px;
+  top: 37%;
+  opacity: 0;
+}
+
+@-moz-keyframes shrink {
+  /* line 81, ../sass/app.sass */
+  0%, 100% {
+    height: 50px;
+  }
+
+  /* line 83, ../sass/app.sass */
+  50% {
+    height: 66px;
+  }
+}
+
+@-webkit-keyframes shrink {
+  /* line 81, ../sass/app.sass */
+  0%, 100% {
+    height: 50px;
+  }
+
+  /* line 83, ../sass/app.sass */
+  50% {
+    height: 66px;
+  }
+}
+
+@-o-keyframes shrink {
+  /* line 81, ../sass/app.sass */
+  0%, 100% {
+    height: 50px;
+  }
+
+  /* line 83, ../sass/app.sass */
+  50% {
+    height: 66px;
+  }
+}
+
+@-ms-keyframes shrink {
+  /* line 81, ../sass/app.sass */
+  0%, 100% {
+    height: 50px;
+  }
+
+  /* line 83, ../sass/app.sass */
+  50% {
+    height: 66px;
+  }
+}
+
+@keyframes shrink {
+  /* line 81, ../sass/app.sass */
+  0%, 100% {
+    height: 50px;
+  }
+
+  /* line 83, ../sass/app.sass */
+  50% {
+    height: 66px;
+  }
+}
+
+@-moz-keyframes fade {
+  /* line 87, ../sass/app.sass */
+  0%, 100% {
+    opacity: 0.1;
+  }
+
+  /* line 89, ../sass/app.sass */
+  50% {
+    opacity: 0.4;
+  }
+}
 
 @-webkit-keyframes fade {
-  from {
-    opacity: 1; }
+  /* line 87, ../sass/app.sass */
+  0%, 100% {
+    opacity: 0.1;
+  }
 
-  to {
-    opacity: 0.25; } }
+  /* line 89, ../sass/app.sass */
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@-o-keyframes fade {
+  /* line 87, ../sass/app.sass */
+  0%, 100% {
+    opacity: 0.1;
+  }
+
+  /* line 89, ../sass/app.sass */
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@-ms-keyframes fade {
+  /* line 87, ../sass/app.sass */
+  0%, 100% {
+    opacity: 0.1;
+  }
+
+  /* line 89, ../sass/app.sass */
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes fade {
+  /* line 87, ../sass/app.sass */
+  0%, 100% {
+    opacity: 0.1;
+  }
+
+  /* line 89, ../sass/app.sass */
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-1 {
+  -webkit-transform:  scale(1, 1) rotateZ(15.65217deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(15.65217deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(15.65217deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(15.65217deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(15.65217deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -1s, 0;
+  -moz-animation-delay: -1s, 0;
+  -ms-animation-delay: -1s, 0;
+  -o-animation-delay: -1s, 0;
+  animation-delay: -1s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-2 {
+  -webkit-transform:  scale(1, 1) rotateZ(31.30435deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(31.30435deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(31.30435deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(31.30435deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(31.30435deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.98565s, 0;
+  -moz-animation-delay: -0.98565s, 0;
+  -ms-animation-delay: -0.98565s, 0;
+  -o-animation-delay: -0.98565s, 0;
+  animation-delay: -0.98565s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-3 {
+  -webkit-transform:  scale(1, 1) rotateZ(46.95652deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(46.95652deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(46.95652deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(46.95652deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(46.95652deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.9713s, 0;
+  -moz-animation-delay: -0.9713s, 0;
+  -ms-animation-delay: -0.9713s, 0;
+  -o-animation-delay: -0.9713s, 0;
+  animation-delay: -0.9713s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-4 {
+  -webkit-transform:  scale(1, 1) rotateZ(62.6087deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(62.6087deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(62.6087deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(62.6087deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(62.6087deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.95696s, 0;
+  -moz-animation-delay: -0.95696s, 0;
+  -ms-animation-delay: -0.95696s, 0;
+  -o-animation-delay: -0.95696s, 0;
+  animation-delay: -0.95696s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-5 {
+  -webkit-transform:  scale(1, 1) rotateZ(78.26087deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(78.26087deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(78.26087deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(78.26087deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(78.26087deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.94261s, 0;
+  -moz-animation-delay: -0.94261s, 0;
+  -ms-animation-delay: -0.94261s, 0;
+  -o-animation-delay: -0.94261s, 0;
+  animation-delay: -0.94261s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-6 {
+  -webkit-transform:  scale(1, 1) rotateZ(93.91304deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(93.91304deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(93.91304deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(93.91304deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(93.91304deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.92826s, 0;
+  -moz-animation-delay: -0.92826s, 0;
+  -ms-animation-delay: -0.92826s, 0;
+  -o-animation-delay: -0.92826s, 0;
+  animation-delay: -0.92826s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-7 {
+  -webkit-transform:  scale(1, 1) rotateZ(109.56522deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(109.56522deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(109.56522deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(109.56522deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(109.56522deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.91391s, 0;
+  -moz-animation-delay: -0.91391s, 0;
+  -ms-animation-delay: -0.91391s, 0;
+  -o-animation-delay: -0.91391s, 0;
+  animation-delay: -0.91391s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-8 {
+  -webkit-transform:  scale(1, 1) rotateZ(125.21739deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(125.21739deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(125.21739deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(125.21739deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(125.21739deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.89957s, 0;
+  -moz-animation-delay: -0.89957s, 0;
+  -ms-animation-delay: -0.89957s, 0;
+  -o-animation-delay: -0.89957s, 0;
+  animation-delay: -0.89957s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-9 {
+  -webkit-transform:  scale(1, 1) rotateZ(140.86957deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(140.86957deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(140.86957deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(140.86957deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(140.86957deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.88522s, 0;
+  -moz-animation-delay: -0.88522s, 0;
+  -ms-animation-delay: -0.88522s, 0;
+  -o-animation-delay: -0.88522s, 0;
+  animation-delay: -0.88522s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-10 {
+  -webkit-transform:  scale(1, 1) rotateZ(156.52174deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(156.52174deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(156.52174deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(156.52174deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(156.52174deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.87087s, 0;
+  -moz-animation-delay: -0.87087s, 0;
+  -ms-animation-delay: -0.87087s, 0;
+  -o-animation-delay: -0.87087s, 0;
+  animation-delay: -0.87087s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-11 {
+  -webkit-transform:  scale(1, 1) rotateZ(172.17391deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(172.17391deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(172.17391deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(172.17391deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(172.17391deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.85652s, 0;
+  -moz-animation-delay: -0.85652s, 0;
+  -ms-animation-delay: -0.85652s, 0;
+  -o-animation-delay: -0.85652s, 0;
+  animation-delay: -0.85652s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-12 {
+  -webkit-transform:  scale(1, 1) rotateZ(187.82609deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(187.82609deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(187.82609deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(187.82609deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(187.82609deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.84217s, 0;
+  -moz-animation-delay: -0.84217s, 0;
+  -ms-animation-delay: -0.84217s, 0;
+  -o-animation-delay: -0.84217s, 0;
+  animation-delay: -0.84217s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-13 {
+  -webkit-transform:  scale(1, 1) rotateZ(203.47826deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(203.47826deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(203.47826deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(203.47826deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(203.47826deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.82783s, 0;
+  -moz-animation-delay: -0.82783s, 0;
+  -ms-animation-delay: -0.82783s, 0;
+  -o-animation-delay: -0.82783s, 0;
+  animation-delay: -0.82783s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-14 {
+  -webkit-transform:  scale(1, 1) rotateZ(219.13043deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(219.13043deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(219.13043deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(219.13043deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(219.13043deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.81348s, 0;
+  -moz-animation-delay: -0.81348s, 0;
+  -ms-animation-delay: -0.81348s, 0;
+  -o-animation-delay: -0.81348s, 0;
+  animation-delay: -0.81348s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-15 {
+  -webkit-transform:  scale(1, 1) rotateZ(234.78261deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(234.78261deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(234.78261deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(234.78261deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(234.78261deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.79913s, 0;
+  -moz-animation-delay: -0.79913s, 0;
+  -ms-animation-delay: -0.79913s, 0;
+  -o-animation-delay: -0.79913s, 0;
+  animation-delay: -0.79913s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-16 {
+  -webkit-transform:  scale(1, 1) rotateZ(250.43478deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(250.43478deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(250.43478deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(250.43478deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(250.43478deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.78478s, 0;
+  -moz-animation-delay: -0.78478s, 0;
+  -ms-animation-delay: -0.78478s, 0;
+  -o-animation-delay: -0.78478s, 0;
+  animation-delay: -0.78478s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-17 {
+  -webkit-transform:  scale(1, 1) rotateZ(266.08696deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(266.08696deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(266.08696deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(266.08696deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(266.08696deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.77043s, 0;
+  -moz-animation-delay: -0.77043s, 0;
+  -ms-animation-delay: -0.77043s, 0;
+  -o-animation-delay: -0.77043s, 0;
+  animation-delay: -0.77043s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-18 {
+  -webkit-transform:  scale(1, 1) rotateZ(281.73913deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(281.73913deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(281.73913deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(281.73913deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(281.73913deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.75609s, 0;
+  -moz-animation-delay: -0.75609s, 0;
+  -ms-animation-delay: -0.75609s, 0;
+  -o-animation-delay: -0.75609s, 0;
+  animation-delay: -0.75609s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-19 {
+  -webkit-transform:  scale(1, 1) rotateZ(297.3913deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(297.3913deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(297.3913deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(297.3913deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(297.3913deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.74174s, 0;
+  -moz-animation-delay: -0.74174s, 0;
+  -ms-animation-delay: -0.74174s, 0;
+  -o-animation-delay: -0.74174s, 0;
+  animation-delay: -0.74174s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-20 {
+  -webkit-transform:  scale(1, 1) rotateZ(313.04348deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(313.04348deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(313.04348deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(313.04348deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(313.04348deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.72739s, 0;
+  -moz-animation-delay: -0.72739s, 0;
+  -ms-animation-delay: -0.72739s, 0;
+  -o-animation-delay: -0.72739s, 0;
+  animation-delay: -0.72739s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-21 {
+  -webkit-transform:  scale(1, 1) rotateZ(328.69565deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(328.69565deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(328.69565deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(328.69565deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(328.69565deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.71304s, 0;
+  -moz-animation-delay: -0.71304s, 0;
+  -ms-animation-delay: -0.71304s, 0;
+  -o-animation-delay: -0.71304s, 0;
+  animation-delay: -0.71304s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-22 {
+  -webkit-transform:  scale(1, 1) rotateZ(344.34783deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(344.34783deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(344.34783deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(344.34783deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(344.34783deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.6987s, 0;
+  -moz-animation-delay: -0.6987s, 0;
+  -ms-animation-delay: -0.6987s, 0;
+  -o-animation-delay: -0.6987s, 0;
+  animation-delay: -0.6987s, 0;
+}
+
+/* line 97, ../sass/app.sass */
+.spinner-arm-23 {
+  -webkit-transform:  scale(1, 1) rotateZ(360deg) translate(0, -100%);
+  -moz-transform:  scale(1, 1) rotateZ(360deg) translate(0, -100%);
+  -ms-transform:  scale(1, 1) rotateZ(360deg) translate(0, -100%);
+  -o-transform:  scale(1, 1) rotateZ(360deg) translate(0, -100%);
+  transform:  scale(1, 1) rotateZ(360deg) translate(0, -100%);
+  -webkit-animation-name: fade, shrink;
+  -moz-animation-name: fade, shrink;
+  -ms-animation-name: fade, shrink;
+  -o-animation-name: fade, shrink;
+  animation-name: fade, shrink;
+  -webkit-animation-duration: 1s, 8s;
+  -moz-animation-duration: 1s, 8s;
+  -ms-animation-duration: 1s, 8s;
+  -o-animation-duration: 1s, 8s;
+  animation-duration: 1s, 8s;
+  -webkit-animation-timing-function: linear, linear;
+  -moz-animation-timing-function: linear, linear;
+  -ms-animation-timing-function: linear, linear;
+  -o-animation-timing-function: linear, linear;
+  animation-timing-function: linear, linear;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -moz-animation-iteration-count: infinite, infinite;
+  -ms-animation-iteration-count: infinite, infinite;
+  -o-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-delay: -0.68435s, 0;
+  -moz-animation-delay: -0.68435s, 0;
+  -ms-animation-delay: -0.68435s, 0;
+  -o-animation-delay: -0.68435s, 0;
+  animation-delay: -0.68435s, 0;
+}

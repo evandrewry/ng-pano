@@ -2,7 +2,6 @@
   "name": "ng-pano",
   "version": "0.1.0",
   "devDependencies": {
-    "grunt-sass": "~0.7.0",
-    "grunt-sass-convert": "~0.1.4"
+    "grunt-contrib-compass": "~0.6.0"
   }
 }

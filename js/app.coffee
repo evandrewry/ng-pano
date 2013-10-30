@@ -67,19 +67,15 @@ define [
 
   cwut.directive 'panoramaSpinner', ['$safeApply', ($safeApply) ->
     require: '^panorama'
-    template: '<div ng-show="loading"><div class="spinner"></div></div>'
+    template: '<div ng-show="loading"><div class="spinner"><div ng-repeat="i in is" class="spinner-arm-{{i}}"></div></div></div>'
     replace: true
     compile: (tElem, tAttrs, transclude) ->
-      spinner = tElem.find '.spinner'
-      for i in [1..13]
-        bar = angular.element "<div class=\"spinner-bar-#{i}\"></div>" 
-        bar.css('-webkit-transform', "rotate(#{360 * i / 13}deg) translate(0, -142%)")
-        spinner.append bar
       (scope, elem, attrs, PanoramaCtrl) ->
-        scope.$on 'pano.loading', -> scope.loading = true
-        scope.$on 'pano.load', -> scope.loading = false
-    controller: ['$scope', ($scope) ->
+    controller: ['$scope', '$timeout', ($scope, $timeout) ->
       $scope.loading = true
+      $scope.is = (i for i in [1..23])
+      $scope.$on 'pano.loading', -> $scope.loading = true
+      $scope.$on 'pano.load', -> $timeout (-> $scope.loading = false), 2000
     ]
   ]
 

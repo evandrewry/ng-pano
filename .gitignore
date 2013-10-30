@@ -2,6 +2,6 @@
 *.swo
 *un~
 
-node_modules/*
-css/scss/*
+.sass-cache
+node_modules
 
