@@ -1,12 +1,10 @@
 body {
-  overflow:hidden;
+  overflow: hidden;
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
 canvas {
-  position:relative;
-}
+  position: relative; }
 
 [marker], .next-texture-btn {
   opacity: 0.5;
@@ -14,33 +12,29 @@ canvas {
   position: absolute;
   cursor: pointer;
   overflow: visible;
-  font-family:sans-serif;
-  color: white;
-}
+  font-family: sans-serif;
+  color: white; }
 
 [marker]:before {
-  content: 'ツ';
+  content: "ツ";
   font-size: 40px;
   height: 40px;
-  width: 40px;
-}
+  width: 40px; }
 
 [marker].active {
-  opacity: 1;
-}
+  opacity: 1; }
 
 [panorama-spinner] {
   position: absolute;
   z-index: 2;
   height: 100%;
-  width: 100%;
-}
+  width: 100%; }
+
 .spinner {
   position: relative;
   height: 100%;
   background-color: black;
-  opacity: 1;
-}
+  opacity: 1; }
 
 .spinner div {
   width: 3px;
@@ -50,16 +44,18 @@ canvas {
   left: 44.5%;
   top: 37%;
   opacity: 0;
-  -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.2);
-  -webkit-animation: fade 1s linear infinite;
-}
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  -webkit-animation: fade 1s linear infinite; }
+
 .next-texture-btn:before {
-  content: '=>';
+  content: "=>";
   font-size: 40px;
   height: 40px;
-  width: 40px;
-}
+  width: 40px; }
 
 @-webkit-keyframes fade {
-  from { opacity: 1; }
-  to { opacity 0.25; }
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0.25; } }

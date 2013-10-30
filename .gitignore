@@ -1,3 +1,7 @@
 *.swp
 *.swo
 *un~
+
+node_modules/*
+css/scss/*
+
