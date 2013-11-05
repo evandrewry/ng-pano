@@ -29,67 +29,42 @@ define [
 
   cwut = ng.module 'cwut', ['panorama']
 
-  cwut.directive 'marker',
-  [
-    'Camera'
-    'Projector'
-    '$timeout'
-    '$safeApply'
+  cwut.directive 'marker', ->
+    templateUrl: 'templates/marker.html'
+    scope:
+      markerPosition: '='
+      onscreen: '='
+      active: '='
+    require: '^panorama'
+    transclude: true
+    replace: true
+    link: (scope, elem, attrs, PanoramaCtrl) ->
+      scope.ctrl = PanoramaCtrl
+      PanoramaCtrl.attach scope, scope.markerPosition
 
-    (Camera, Projector,$timeout, $safeApply)->
-      template: '<div ng-click="onclick()" ng-style="{left: x, top: y, \'margin-left\': offset}" ng-class="{\'active\': active}" ng-show="onscreen && !ctrl.loading" ng-transclude></div>'
-      scope:
-        markerPosition: '='
-        onscreen: '='
-      require: '^panorama'
-      transclude: true
-      replace: true
-      link: (scope, elem, attrs, PanoramaCtrl) ->
-        scope.ctrl = PanoramaCtrl
-        PanoramaCtrl.attach scope, scope.markerPosition
-
-        scope.active = false
-        scope.onclick = -> scope.active = !scope.active
-  ]
+      scope.active = false
+      scope.onclick = -> scope.active = !scope.active
 
   cwut.factory 'MARKERS', ->
     m = new THREE.Vector3(m.x, m.y, m.z) for m in data.markers
 
   cwut.directive 'markerPano', ->
-      templateUrl: 'templates/marker-pano.html'
-      controller: ['$scope', 'Panorama', 'MARKERS', ($scope, Panorama, MARKERS) ->
-          $scope.markers = MARKERS
-          $scope.next = Panorama.nextTexture
-      ]
+    templateUrl: 'templates/marker-pano.html'
+    controller: ['$scope', 'Panorama', 'MARKERS', ($scope, Panorama, MARKERS) ->
+        $scope.markers = MARKERS
+        $scope.next = Panorama.nextTexture
+    ]
 
-  cwut.directive 'panoramaSpinner', ['$safeApply', ($safeApply) ->
+  cwut.directive 'panoramaSpinner', ->
     require: '^panorama'
-    template: '<div ng-show="loading"><div class="spinner"><div ng-repeat="i in is" class="spinner-arm-{{i}}"></div></div></div>'
+    templateUrl: 'templates/spinner.html'
+    scope:
+      n: "@"
     replace: true
-    compile: (tElem, tAttrs, transclude) ->
-      (scope, elem, attrs, PanoramaCtrl) ->
-    controller: ['$scope', '$timeout', ($scope, $timeout) ->
-      $scope.loading = true
-      $scope.is = (i for i in [1..23])
+    controller: ['$scope', '$timeout', '$attrs', 'Panorama', ($scope, $timeout, $attrs, Panorama) ->
+      $scope.loading = Panorama.loading
+      $scope.is = (i for i in [1..(parseInt $attrs.n)])
       $scope.$on 'pano.loading', -> $scope.loading = true
       $scope.$on 'pano.load', -> $timeout (-> $scope.loading = false), 2000
     ]
-  ]
 
-  cwut.directive 'panorama',
-  [
-    'Panorama'
-    'Renderer'
-    'MARKERS'
-
-    (Panorama, Renderer, MARKERS) ->
-      template: '<div ng-transclude></div>'
-      replace: true
-      transclude: true
-      controllerAs: 'PanoramaCtrl'
-      controller: ['Panorama', (Panorama) ->
-        Panorama
-      ]
-      link: (scope, elem, attrs) ->
-        elem.append Renderer.domElement
-  ]
