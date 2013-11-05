@@ -185,14 +185,18 @@ define [
     ($rootScope, Trackball, Clock, Renderer, Camera, SphereFactory, Projector, Scene, DEFAULT_FOV, TEXTURE, $safeApply) ->
       class Panorama
         onrender: []
-        onloading: []
-        onready: []
         constructor: ->
           @setTexture TEXTURE[@currentTexture = 0]
           Renderer.setSize window.innerWidth, window.innerHeight
           Renderer.sortObjects = false
           @animate()
 
+          window.addEventListener 'resize', (=>@onresize()), false
+
+        onresize: =>
+          Camera.aspect = window.innerWidth / window.innerHeight
+          Camera.updateProjectionMatrix()
+          Renderer.setSize(window.innerWidth / window.innerHeight)
         render: (force) =>
           Camera.trackball()
           Renderer.render Scene, Camera if Trackball.stale or force
@@ -206,10 +210,12 @@ define [
           @setTexture TEXTURE[@currentTexture]
         setTexture: (textureUrl) =>
           $rootScope.$broadcast 'pano.loading'
+          @loading = true
           @remove() if @group
           @group = SphereFactory textureUrl, =>
             @render true
             $rootScope.$broadcast 'pano.load'
+            @loading = false
           Scene.add @group
         attach: (scope, position) ->
           @registerCallback ->
@@ -220,7 +226,6 @@ define [
                 $safeApply scope, ->
                   scope.x = proj.x
                   scope.y = proj.y
-
         remove: =>
           Scene.remove @group
 
@@ -230,3 +235,20 @@ define [
   ]
 
 
+  pano.directive 'panorama',
+  [
+    'Panorama'
+    'Renderer'
+    'MARKERS'
+
+    (Panorama, Renderer, MARKERS) ->
+      template: '<div ng-transclude></div>'
+      replace: true
+      transclude: true
+      controllerAs: 'PanoramaCtrl'
+      controller: ['Panorama', (Panorama) ->
+        Panorama
+      ]
+      link: (scope, elem, attrs) ->
+        elem.append Renderer.domElement
+  ]
