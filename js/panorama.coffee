@@ -80,9 +80,6 @@ define [
     else
       new THREE.CanvasRenderer()
 
-  pano.factory 'MARKERS', ->
-    m = new THREE.Vector3(m.x, m.y, m.z) for m in data.markers
-
   pano.factory 'Camera', ['Trackball', 'DEFAULT_FOV', 'DEFAULT_SPHERE_RADIUS', (Trackball, DEFAULT_FOV, DEFAULT_SPHERE_RADIUS) ->
     camera = new THREE.PerspectiveCamera DEFAULT_FOV, window.innerWidth / window.innerHeight, 1, 1100
     camera.target = new THREE.Vector3 0, 0, 0
@@ -171,7 +168,6 @@ define [
     new Trackball()
 
 
-
   pano.factory 'Panorama',
   [
     '$rootScope',
@@ -183,11 +179,10 @@ define [
     'Projector',
     'Scene',
     'DEFAULT_FOV',
-    'MARKERS',
     'TEXTURE',
     '$safeApply',
 
-    ($rootScope, Trackball, Clock, Renderer, Camera, SphereFactory, Projector, Scene, DEFAULT_FOV, MARKERS, TEXTURE, $safeApply) ->
+    ($rootScope, Trackball, Clock, Renderer, Camera, SphereFactory, Projector, Scene, DEFAULT_FOV, TEXTURE, $safeApply) ->
       class Panorama
         onrender: []
         onloading: []
@@ -216,6 +211,16 @@ define [
             @render true
             $rootScope.$broadcast 'pano.load'
           Scene.add @group
+        attach: (scope, position) ->
+          @registerCallback ->
+            scope.onscreen = Projector.getScreenPosition(position)
+            if scope.onscreen
+              proj = Projector.getScreenPosition(position.clone(), Camera)
+              if proj
+                $safeApply scope, ->
+                  scope.x = proj.x
+                  scope.y = proj.y
+
         remove: =>
           Scene.remove @group
 
