@@ -1,7 +1,22 @@
 <div panorama>
   <div panorama-spinner data-n="23"></div>
   <div marker data-marker-position="marker" data-onscreen="marker.visible" data-active="marker.active" ng-repeat="marker in markers">
-    <div ng-show="marker.active">hiiiiiiiiiiiiiiiii</div>
   </div>
   <div class="next-texture-btn" ng-click="next()"></div>
+</div>
+<div class="marker-panel" ng-show="marker">
+  <div class="close-btn" ng-click="marker.active = false; marker = null"></div>
+  <div class="marker-panel-inner">
+    <div class="marker-panel-inner-cell">
+      3d position:
+      <div>x: {{marker.x | number}}</div>
+      <div>y: {{marker.y | number}}</div>
+      <div>z: {{marker.z | number}}</div>
+    </div>
+    <div class="marker-panel-inner-cell">
+      screen position:
+      <div>x: {{marker.proj.x | number}}</div>
+      <div>y: {{marker.proj.y | number}}</div>
+    </div>
+  </div>
 </div>

@@ -180,6 +180,7 @@ define [
             scope.onscreen = Projector.getScreenPosition(position)
             if scope.onscreen
               proj = Projector.getScreenPosition(position.clone(), Camera)
+              position.proj = proj
               if proj
                 $safeApply scope, ->
                   scope.x = proj.x
