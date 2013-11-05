@@ -3,6 +3,10 @@
 @import "compass/css3/user-interface"
 @import "animation"
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic)
+=open-sans
+  font-family: 'Open Sans', sans-serif
+  font-weight: 300
+  font-style: italic
 body
   overflow: hidden
   margin: 0
@@ -30,7 +34,45 @@ canvas
 [marker].active
   opacity: 1
 
-
+.marker-panel
+  +open-sans
+  text-transform: uppercase
+  font-size: 36px
+  color: white
+  opacity: 1
+  position: fixed
+  left: 60%
+  right: 0
+  top: 0
+  margin: 20px
+  padding: 15px
+  background: #111
+  opacity: 0.9
+  z-index: 11
+  border: 1px solid #666
+  text-align: center
+  .close-btn
+    position: absolute
+    height: 21px
+    width: 21px
+    top: 12px
+    right: 12px
+    opacity: 0.4
+    color: black
+    background-color: white
+    cursor: pointer
+    text-align: center
+    text-transform: none
+    font-style: normal
+    font-size: 25px
+    line-height: 16px
+    &:before
+      content: 'x'
+.marker-panel-inner
+  height: 100%
+  width: 100%
+.marker-panel-inner-cell
+  display: inline-block
 .next-texture-btn:before
   content: '=>'
   font-size: 40px
@@ -39,15 +81,10 @@ canvas
 
 [panorama-spinner]
   background-color: black
-  position: absolute
+  position: fixed
   z-index: 2
   height: 100%
   width: 100%
-
-=open-sans
-  font-family: 'Open Sans', sans-serif
-  font-weight: 300
-  font-style: italic
 .spinner
   position: relative
   width: 100%

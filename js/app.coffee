@@ -43,7 +43,9 @@ define [
       PanoramaCtrl.attach scope, scope.markerPosition
 
       scope.active = false
-      scope.onclick = -> scope.active = !scope.active
+      scope.onclick = ->
+        scope.active = !scope.active
+        scope.$emit 'marker.clicked', scope
 
   cwut.factory 'MARKERS', ->
     m = new THREE.Vector3(m.x, m.y, m.z) for m in data.markers
@@ -53,6 +55,10 @@ define [
     controller: ['$scope', 'Panorama', 'MARKERS', ($scope, Panorama, MARKERS) ->
         $scope.markers = MARKERS
         $scope.next = Panorama.nextTexture
+        $scope.$on 'marker.clicked', (e, scope) ->
+          $scope.marker.active = false if $scope.marker
+          $scope.marker = null
+          $scope.marker = scope.markerPosition if scope.active
     ]
 
   cwut.directive 'panoramaSpinner', ->
